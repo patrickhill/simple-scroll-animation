@@ -13,9 +13,9 @@ function update() {
     // so browsers that don't support RAF won't show unfinished animation states
     animatedEl[i].classList.add("can-animate-onscroll");
     if (animatedEl[i].offsetTop < (activationPoint) ){
-      animatedEl[i].classList.add("animation-start");
+      animatedEl[i].classList.add("animate-onscroll-start");
     } else {
-      animatedEl[i].classList.remove("animation-start");
+      animatedEl[i].classList.remove("animate-onscroll-start");
     }
   }
 
