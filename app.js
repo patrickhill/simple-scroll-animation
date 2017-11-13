@@ -6,7 +6,9 @@ const animatedEl = document.getElementsByClassName("animate-onscroll");
 
 function update() {
 	ticking = false;
-  const activationPoint = latestKnownScrollY + (windowHeight * 0.5);
+  // where to activate .5 = 50%, .2 = 20% of screen
+  const offsetAmount = .5;
+  const activationPoint = latestKnownScrollY + (windowHeight * offsetAmount);
 
   for (let i = 0; i < animatedEl.length; i++) {
     // set base animation styles in css with .can-animate-onscroll
@@ -41,4 +43,3 @@ update();
 
 window.addEventListener('scroll', onScroll, false);
 window.addEventListener('resize', onResize, false);
-

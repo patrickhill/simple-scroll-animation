@@ -1,11 +1,26 @@
-.can-animate-onscroll .animate-me {
-  opacity: 0;
-  transform: translateX(-200%);
+body {
+  font-family: sans-serif;
+  padding: 200px 32px;
+  min-height: 2000px;
+  max-width: 900px;
+  margin: auto;
+}
+
+h1 {
+  margin-bottom: 400px;
+}
+
+.can-animate-onscroll {
+  /* transform: translateX(70%); */
+  transform: rotate(0deg);
+  background-color: #eee;
   transition: all .3s ease;
+  padding: 100px;
+  margin-bottom: 300px;
 }
 .animate-onscroll-start {
-  .animate-me {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  background-color: #333;
+  color: white;
+  /* transform: translateX(0); */
+  transform: rotate(360deg);
 }
