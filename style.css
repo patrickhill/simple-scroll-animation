@@ -1,0 +1,11 @@
+.can-animate-onscroll .animate-me {
+  opacity: 0;
+  transform: translateX(-200%);
+  transition: all .3s ease;
+}
+.animate-onscroll-start {
+  .animate-me {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
