@@ -36,6 +36,9 @@ function onResize() {
 	windowHeight = window.innerHeight;
 }
 
+// run update once to initialize css animations
+update();
+
 window.addEventListener('scroll', onScroll, false);
 window.addEventListener('resize', onResize, false);
 
