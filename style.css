@@ -11,17 +11,20 @@ h1 {
   line-height: 1.3;
 }
 
-.can-animate-onscroll {
-  /* transform: translateX(70%); */
-  transform: rotate(0deg);
-  transition: all .3s ease;
+
+/*
+ .animate-onscroll - the activation class that JS looks for. You don't actually need to use in css.
+ .can-animate-onscroll - JS adds this class if the browser supports rAF. Put any base animations styles here so they don't get applied on browsers that don't support rAF
+ .animate-onscroll-start - Gets added when element scrolls into view. Use this to kick off the animation.
+*/
+
+/* base styles */
+.panel {
   padding: 100px;
   margin-bottom: 300px;
   position: relative;
-  color: black;
-  will-change: color, transform, opacity;
 }
-.can-animate-onscroll:after {
+.panel:after {
   content: "";
   width: 100%;
   height: 100%;
@@ -30,13 +33,27 @@ h1 {
   top: 0;
   left: 0;
   background-color: #444;
+}
+
+/* if browser can animate with rAF styles */
+.can-animate-onscroll
+.panel {
+  transition: all .3s ease;
+  will-change: color, transform, opacity;
+}
+.can-animate-onscroll
+.panel:after {
   opacity: .1;
   will-change: opacity;
 }
-.animate-onscroll-start {
+
+/* Animation styles */
+.animate-onscroll-start
+.panel {
   transform: rotate(360deg);
   color: white;
 }
-.animate-onscroll-start:after {
+.animate-onscroll-start
+.panel:after {
   opacity: 1;
 }
