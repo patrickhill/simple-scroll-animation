@@ -1,45 +1,39 @@
-
-let latestKnownScrollY = 0;
 let ticking = false;
-let windowHeight = window.innerHeight;
-const animatedEl = document.getElementsByClassName("animate-onscroll");
+let activationPoint = (window.innerHeight * 0.5);
+const animatedElems = document.getElementsByClassName("animate-onscroll");
 
+function initAnimations() {
+  for (let i = 0; i < animatedElems.length; i++) {
+    // add can-animate so browsers that don't support rAF won't show unfinished animation states
+    animatedElems[i].classList.add("can-animate-onscroll");
+  }
+}
 function update() {
-	ticking = false;
-  // where to activate .5 = 50%, .2 = 20% of screen
-  const offsetAmount = .5;
-  const activationPoint = latestKnownScrollY + (windowHeight * offsetAmount);
-
-  for (let i = 0; i < animatedEl.length; i++) {
-    // set base animation styles in css with .can-animate-onscroll
-    // so browsers that don't support RAF won't show unfinished animation states
-    animatedEl[i].classList.add("can-animate-onscroll");
-    if (animatedEl[i].offsetTop < (activationPoint) ){
-      animatedEl[i].classList.add("animate-onscroll-start");
-    } else {
-      animatedEl[i].classList.remove("animate-onscroll-start");
+  for (let i = 0; i < animatedElems.length; i++) {
+    const eleY = animatedElems[i].getBoundingClientRect().y;
+    const elemClass = animatedElems[i].classList;
+    if ( eleY < activationPoint ){
+      elemClass.add("animate-onscroll-start");
+    } else if ( elemClass.contains("animate-onscroll-start") ) {
+      elemClass.remove("animate-onscroll-start");
     }
   }
-
-}
-
-function requestTick() {
-	if(!ticking) {
-		requestAnimationFrame(update);
-	}
-	ticking = true;
+  // when finished with stuff, reset ticking so new rAF can be started
+  ticking = false;
 }
 
 function onScroll() {
-	latestKnownScrollY = window.scrollY;
-	requestTick();
+  // check if rAF is already running
+  if(!ticking) {
+		requestAnimationFrame(update);
+    // set rAF as running so we don't call it again until last one finishes
+    ticking = true;
+	}
 }
 function onResize() {
-	windowHeight = window.innerHeight;
+  activationPoint = (window.innerHeight * 0.5);
 }
 
-// run update once to initialize css animations
-update();
-
+requestAnimationFrame(initAnimations);
 window.addEventListener('scroll', onScroll, false);
 window.addEventListener('resize', onResize, false);
