@@ -34,6 +34,8 @@ function onResize() {
   activationPoint = (window.innerHeight * 0.5);
 }
 
-requestAnimationFrame(initAnimations);
-window.addEventListener('scroll', onScroll, false);
-window.addEventListener('resize', onResize, false);
+if (animatedElems.length > 0) {
+  requestAnimationFrame(initAnimations);
+  window.addEventListener('scroll', onScroll, false);
+  window.addEventListener('resize', onResize, false);
+}
